@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translatica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Translatica</h1>
+    <form id="translate-form">
+        <textarea name="text" placeholder="Enter text to translate" required></textarea>
+        <select name="source_lang">
+            <option value="en">English</option>
+            <option value="id">Indonesian</option>
+            <option value="de">German</option>
+        </select>
+        <select name="target_lang">
+            <option value="id">Indonesian</option>
+            <option value="en">English</option>
+            <option value="de">German</option>
+        </select>
+        <button type="submit">Translate</button>
+    </form>
+    <div id="translated-text"></div>
+    <script>
+        document.getElementById('translate-form').onsubmit = async (e) => {
+            e.preventDefault();
+            const text = e.target.elements.text.value;
+            const source_lang = e.target.elements.source_lang.value;
+            const target_lang = e.target.elements.target_lang.value;
+
+            const response = await fetch('/translate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text, source_lang, target_lang })
+            });
+            const data = await response.json();
+            document.getElementById('translated-text').innerText = data.translated_text;
+        };
+    </script>
+</body>
+</html>
