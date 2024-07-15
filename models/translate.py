@@ -4,9 +4,9 @@ from transformers import MarianMTModel, MarianTokenizer
 model_helsinki_dict = {
     'en-id': 'Helsinki-NLP/opus-mt-en-id',
     'id-en': 'Helsinki-NLP/opus-mt-id-en',
-    'en-de': 'Helsinki-NLP/opus-mt-en-fr',
-    'de-en': 'Helsinki-NLP/opus-mt-fr-en',
-    "id-de": "Helsinki-NLP/opus-mt-id-fr",
+    'en-fr': 'Helsinki-NLP/opus-mt-en-fr',
+    'fr-en': 'Helsinki-NLP/opus-mt-fr-en',
+    "id-fr": "Helsinki-NLP/opus-mt-id-fr",
     'de-id': 'Helsinki-NLP/opus-mt-fr-id',
 }
 

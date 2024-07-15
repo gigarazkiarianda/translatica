@@ -4,25 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translatica</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Translatica</h1>
-    <form id="translate-form">
-        <textarea name="text" placeholder="Enter text to translate" required></textarea>
-        <select name="source_lang">
-            <option value="en">English</option>
-            <option value="id">Indonesian</option>
-            <option value="de">German</option>
-        </select>
-        <select name="target_lang">
-            <option value="id">Indonesian</option>
-            <option value="en">English</option>
-            <option value="de">German</option>
-        </select>
-        <button type="submit">Translate</button>
-    </form>
-    <div id="translated-text"></div>
+    <nav class="navbar">
+        <div class="container">
+            <h2>Translatica</h2>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <h1>Translate Text</h1>
+        <form id="translate-form">
+            <textarea name="text" placeholder="Enter text to translate" required></textarea>
+            <select name="source_lang">
+                <option value="en">English</option>
+                <option value="id">Indonesian</option>
+                <option value="fr">France</option>
+            </select>
+            <select name="target_lang">
+                <option value="id">Indonesian</option>
+                <option value="en">English</option>
+                <option value="fr">France</option>
+            </select>
+            <button type="submit">Translate</button>
+        </form>
+        <div id="translated-text"></div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Translatica. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
         document.getElementById('translate-form').onsubmit = async (e) => {
             e.preventDefault();
