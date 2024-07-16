@@ -9,29 +9,32 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <h2>Translatica</h2>
-            <ul>
+            <h2 class="logo">Translatica</h2>
+            <ul class="nav-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
+                <li><a href="#">Login</a></li>
             </ul>
         </div>
     </nav>
 
     <main>
-        <h1>Translate Text</h1>
         <form id="translate-form">
+            <div class="lang-select">
+                <select name="source_lang" id="source-lang">
+                    <option value="en">English</option>
+                    <option value="id">Indonesian</option>
+                    <option value="fr">French</option>
+                </select>
+                <button type="button" id="swap-langs">Swap</button>
+                <select name="target_lang" id="target-lang">
+                    <option value="id">Indonesian</option>
+                    <option value="en">English</option>
+                    <option value="fr">French</option>
+                </select>
+            </div>
             <textarea name="text" placeholder="Enter text to translate" required></textarea>
-            <select name="source_lang">
-                <option value="en">English</option>
-                <option value="id">Indonesian</option>
-                <option value="fr">France</option>
-            </select>
-            <select name="target_lang">
-                <option value="id">Indonesian</option>
-                <option value="en">English</option>
-                <option value="fr">France</option>
-            </select>
             <button type="submit">Translate</button>
         </form>
         <div id="translated-text"></div>
@@ -59,6 +62,15 @@
             });
             const data = await response.json();
             document.getElementById('translated-text').innerText = data.translated_text;
+        };
+
+        document.getElementById('swap-langs').onclick = () => {
+            const sourceLangSelect = document.getElementById('source-lang');
+            const targetLangSelect = document.getElementById('target-lang');
+
+            const sourceLangValue = sourceLangSelect.value;
+            sourceLangSelect.value = targetLangSelect.value;
+            targetLangSelect.value = sourceLangValue;
         };
     </script>
 </body>
