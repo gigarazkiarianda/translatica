@@ -1,4 +1,4 @@
-<h1 align="center">Anjaydev</h1>
+<h1 align="center">Translatica</h1>
 
 <p align="center">
   <a href="LICENSE">
