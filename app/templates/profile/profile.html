@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translatica - Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h2 class="logo">Translatica</h2>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('main.about') }}">About</a></li>
+                <li><a href="{{ url_for('main.profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('main.login') }}">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <h1>Your Profile</h1>
+        <div class="profile-container">
+            <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Profile Picture" class="profile-pic">
+            <div class="profile-info">
+                <p><strong>Username:</strong> <span>{{ user.username }}</span></p>
+                <p><strong>Email:</strong> <span>{{ user.email }}</span></p>
+                <p><strong>Password:</strong> <span>********</span></p>
+                <button onclick="window.location.href='{{ url_for('main.profile') }}'">Edit Profile</button>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Translatica. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translatica - About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            background-color: #01444E;
+            color: white;
+            padding: 1rem 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-links li a:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+
+        main {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 1400px; /* Adjusted width */
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: justify; /* Justified text */
+        }
+
+        footer {
+            background-color: #01444E;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h2 class="logo">Translatica</h2>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('main.about') }}">About</a></li>
+                <li><a href="{{ url_for('main.profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('main.login') }}">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <h1>About Translatica</h1>
+        <p>Translatica is a language translation service that utilizes NLP models from Helsinki and several other frameworks. With this advanced technology, Translatica provides accurate and fast translations for Indonesian, English, and French. Currently, the service is available through the website, making it easy for users to perform instant translations online. Translatica is committed to continuous improvement and expanding its features. In the near future, we will also launch an Android application, allowing users to access translation services more conveniently and efficiently. With Translatica, cross-language communication becomes easier and more accessible for everyone, helping to overcome language barriers in various contexts. We strive to deliver the best translation experience and support users' needs for global communication.</p>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Translatica. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -47,6 +47,18 @@ main {
     text-align: center;
 }
 
+.container > h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.container > p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -107,6 +119,5 @@ footer {
 }
 
 footer p {
-    padding-left: 500px;
-    padding-right: 250px;
+    padding-left: 50px;
 }
