@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translatica</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .logo img {
+            max-width: 100px; /* Ubah sesuai keinginan Anda */
+            height: auto;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
-            <h2 class="logo">Translatica</h2>
+            <h2 class="logo"><a href="{{ url_for('main.index') }}"><img src="{{ url_for('static', filename='img/translation_logo.png') }}" alt="Translatica Logo"></a></h2>
             <ul class="nav-links">
                 <li><a href="{{ url_for('main.index') }}">Home</a></li>
                 <li><a href="{{ url_for('main.about') }}">About</a></li>
