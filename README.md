@@ -54,7 +54,12 @@ Python run.py
 * Real-time Translation
 
 ## Highlight
-> Program Picture
+
+![Login Page](https://github.com/user-attachments/assets/ac8594f0-2bf1-47a7-af3c-4db23a85f6af)
+![home page](https://github.com/user-attachments/assets/7cab7d3d-de7a-49b9-8298-ea338644e2a7)
+![About page](https://github.com/user-attachments/assets/a05ec45e-7de8-4595-8f5f-f975f07b4cf6)
+![Register Page](https://github.com/user-attachments/assets/a160605e-f5a5-48a9-89e9-b02278353e0f)
+
 
 ## Issue
 
