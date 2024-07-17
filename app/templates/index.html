@@ -6,21 +6,153 @@
     <title>Translatica</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
-        .logo img {
-            max-width: 100px; /* Ubah sesuai keinginan Anda */
-            height: auto;
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #01444E;
+            color: white;
+            padding: 1rem 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.3s;
+        }
+        .nav-links li a:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        main {
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .lang-select {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        select {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 0 0.5rem;
+        }
+        textarea {
+            width: 100%;
+            max-width: 1210px;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            resize: vertical;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            color: white;
+            background-color: #01444E;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #575757;
+        }
+        footer {
+            background-color: #01444E;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        #translated-text {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 1250px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media (max-width: 768px) {
+            .lang-select {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
-            <h2 class="logo"><a href="{{ url_for('main.index') }}"><img src="{{ url_for('static', filename='img/translation_logo.png') }}" alt="Translatica Logo"></a></h2>
+            <h2 class="logo">
+                <a href="{{ url_for('main.index') }}">
+                    <img src="{{ url_for('static', filename='img/translatica_logo.png') }}" alt="Translatica Logo" style="max-width: 250px;">
+                </a>
+            </h2>
             <ul class="nav-links">
                 <li><a href="{{ url_for('main.index') }}">Home</a></li>
                 <li><a href="{{ url_for('main.about') }}">About</a></li>
-                <li><a href="{{ url_for('main.profile') }}">Profile</a></li>
-                <li><a href="{{ url_for('main.login') }}">Login</a></li>
+                {% if username %}
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">{{ username }}</a>
+                        <div class="dropdown-content">
+                            <a href="{{ url_for('main.profile') }}">Settings</a>
+                            <a href="{{ url_for('main.logout') }}">Logout</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li><a href="{{ url_for('main.login') }}">Login</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -40,35 +172,51 @@
                     <option value="fr">French</option>
                 </select>
             </div>
-            <textarea name="text" placeholder="Enter text to translate" required></textarea>
+            <textarea name="text" id="text" rows="4" placeholder="Enter text to translate..."></textarea>
             <button type="submit">Translate</button>
         </form>
         <div id="translated-text"></div>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Translatica. All rights reserved.</p>
-        </div>
+        <p>2024 Translatica. All rights reserved.</p>
     </footer>
 
     <script>
-        document.getElementById('translate-form').onsubmit = async (e) => {
+        document.getElementById('translate-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const text = e.target.elements.text.value;
-            const source_lang = e.target.elements.source_lang.value;
-            const target_lang = e.target.elements.target_lang.value;
 
-            const response = await fetch('/translate', {
+            const text = document.getElementById('text').value;
+            const sourceLang = document.getElementById('source-lang').value;
+            const targetLang = document.getElementById('target-lang').value;
+            const token = localStorage.getItem('jwt');
+
+            const response = await fetch('{{ url_for('main.translate') }}', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ text, source_lang, target_lang })
+                body: JSON.stringify({
+                    text,
+                    source_lang: sourceLang,
+                    target_lang: targetLang
+                })
             });
-            const data = await response.json();
-            document.getElementById('translated-text').innerText = data.translated_text;
-        };
+
+            try {
+                const result = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('translated-text').innerText = result.translated_text;
+                } else {
+                    document.getElementById('translated-text').innerText = result.msg || 'Translation failed';
+                }
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                document.getElementById('translated-text').innerText = 'An error occurred while processing the request.';
+            }
+        });
 
         document.getElementById('swap-langs').onclick = () => {
             const sourceLangSelect = document.getElementById('source-lang');

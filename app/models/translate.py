@@ -23,7 +23,7 @@ def translate_text(text, source_lang, target_lang):
     tokenizer = tokenizers[model_name]
     model = models[model_name]
 
-    inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True)
+    inputs = tokenizer(text, return_tensors="pt", padding=True)
     translated = model.generate(**inputs)
     translated_text = tokenizer.decode(translated[0], skip_special_tokens=True)
 

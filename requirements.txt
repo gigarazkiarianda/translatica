@@ -1,4 +1,9 @@
 Flask
+Flask-JWT-Extended
+Flask-SQLAlchemy
+Flask-Migrate
+psycopg2-binary
+python-dotenv
 transformers
 torch
 huggingface_hub

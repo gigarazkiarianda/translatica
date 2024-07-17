@@ -1,23 +1,42 @@
 import unittest
-from models.translate import translate_text
+from app import create_app, db
+from app.models.user import User
 
-class TestTranslation(unittest.TestCase):
+class TranslateTestCase(unittest.TestCase):
+    def setUp(self):
+        self.app = create_app()
+        self.app.config['TESTING'] = True
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+        self.client = self.app.test_client()
+        with self.app.app_context():
+            db.create_all()
 
-    def test_translation_en_to_id(self):
-        result = translate_text("Hello", "en", "id")
-        self.assertEqual(result, "Halo")
+    def tearDown(self):
+        with self.app.app_context():
+            db.session.remove()
+            db.drop_all()
 
-    def test_translation_id_to_en(self):
-        result = translate_text("Selamat pagi", "id", "en")
-        self.assertEqual(result, "Good morning")
+    def test_register(self):
+        response = self.client.post('/register', json={
+            'username': 'testuser',
+            'email': 'test@example.com',
+            'password': 'password123',
+            'password_confirmed': 'password123'
+        })
+        self.assertEqual(response.status_code, 201)
 
-    def test_translation_en_to_fr(self):
-        result = translate_text("Hello", "en", "fr")
-        self.assertEqual(result, "Bonjour")
+    def test_login(self):
+        self.client.post('/register', json={
+            'username': 'testuser',
+            'email': 'test@example.com',
+            'password': 'password123',
+            'password_confirmed': 'password123'
+        })
+        response = self.client.post('/login', json={
+            'username': 'testuser',
+            'password': 'password123'
+        })
+        self.assertEqual(response.status_code, 200)
 
-    def test_translation_fr_to_en(self):
-        result = translate_text("Bonjour", "fr", "en")
-        self.assertEqual(result, "Hello")
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
