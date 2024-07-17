@@ -52,7 +52,6 @@ Python run.py
 * Multi-language
 * Multi-Models
 * Real-time Translation
-* Mobile App (coming soo)
 
 ## Highlight
 > Program Picture
@@ -60,11 +59,11 @@ Python run.py
 ## Issue
 
 >Warning
-* Scalability
-* Accuracy
-* Security
-* Language Expansion
-* User Experience
+* data limitations
+* There is still an error with login authentication for only one account
+* There are still errors on the backend developer side
+* the display is not very responsive
+* still using only 1 model
 
 ## Refrensi
 List of references used or useful for understanding this project:
