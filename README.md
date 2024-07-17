@@ -73,6 +73,8 @@ Python run.py
 * the display is not very responsive
 * still using only 1 model
 
+  The problems above will continue to be fixed regularly by me
+
 ## Refrensi
 List of references used or useful for understanding this project:
 
