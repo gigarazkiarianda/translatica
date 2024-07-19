@@ -32,16 +32,6 @@ def about():
     username = get_username_from_token()
     return render_template('about/about.html', username=username)
 
-@main.route('/profile')
-@jwt_required()
-def profile():
-    current_user_id = get_jwt_identity()
-    user = User.query.filter_by(id=current_user_id).first_or_404()
-    user_data = {
-        'username': user.username,
-        'email': user.email
-    }
-    return render_template('profile/profile.html', user=user_data)
 
 @main.route('/login', methods=['GET', 'POST'])
 def login():
@@ -60,7 +50,7 @@ def login():
             access_token = create_access_token(identity=user.id)
             response = make_response(jsonify({'access_token': access_token}), 200)
             response.set_cookie('jwt_token', access_token, httponly=True)
-            return response  # Returns JSON response for AJAX call
+            return response  
         else:
             return jsonify({'msg': 'Invalid username or password'}), 401
 

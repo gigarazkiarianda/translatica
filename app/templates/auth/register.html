@@ -161,7 +161,9 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <h2 class="logo">Translatica</h2>
+            <a href="{{ url_for('main.index') }}">
+                <img src="{{ url_for('static', filename='img/translatica_logo.png') }}" alt="Translatica Logo" style="max-width: 250px;">
+            </a>
             <ul class="nav-links">
                 <li><a href="{{ url_for('main.index') }}">Home</a></li>
                 <li><a href="{{ url_for('main.about') }}">About</a></li>

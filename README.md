@@ -40,6 +40,13 @@ code .
 # Install requirements.txt
 pip install -r requirements.txt
 
+#Install Venv on windows
+python -m venv myenv
+
+or
+
+#install Venv or windows 
+python3 -m venv myenv
 
 # Run the program
 Python run.py
